@@ -44,7 +44,7 @@ class PollsRepositoryTest {
         String testValue = "sont les";
         List<Poll> positiveResult = pollsRepository.findByTitleContains(testValue);
 
-        Assertions.assertTrue(positiveResult.size() == 1, "Result of finding by title (Positive) must be 1");
+        Assertions.assertEquals(1, positiveResult.size(), "Result of finding by title (Positive) must be 1");
         Assertions.assertTrue(positiveResult.get(0).getTitle().contains(testValue), "Result title must contain the searched text");
     }
 
@@ -54,7 +54,7 @@ class PollsRepositoryTest {
         String testValue = "Not Existing";
         List<Poll> positiveResult = pollsRepository.findByTitleContains(testValue);
 
-        Assertions.assertTrue(positiveResult.size() == 0, "Result of finding by title (Negative) must be None");
+        Assertions.assertEquals(0, positiveResult.size(), "Result of finding by title (Negative) must be None");
     }
 
 
@@ -63,7 +63,7 @@ class PollsRepositoryTest {
         String testValue = "Doe";
         List<Poll> positiveResult = pollsRepository.findByInitiatorNameContains(testValue);
 
-        Assertions.assertTrue(positiveResult.size() == 36, "Result of finding by initiator name (Positive) must be 36");
+        Assertions.assertEquals(36, positiveResult.size(), "Result of finding by initiator name (Positive) must be 36");
         Assertions.assertTrue(positiveResult.stream()
                 .map(r -> r.getInitiator().getName().contains(testValue))
                 .reduce((r1, r2) -> r1 && r2)
@@ -75,7 +75,7 @@ class PollsRepositoryTest {
         String testValue = "Lee";
         List<Poll> positiveResult = pollsRepository.findByInitiatorNameContains(testValue);
 
-        Assertions.assertTrue(positiveResult.size() == 0, "Result of finding by initiator name (Negative) must be 0");
+        Assertions.assertEquals(0, positiveResult.size(), "Result of finding by initiator name (Negative) must be 0");
     }
 
 
@@ -84,7 +84,7 @@ class PollsRepositoryTest {
         Long testValue = new SimpleDateFormat("yyyy-MM-dd").parse("2017-01-25").getTime();
 
         List<Poll> positiveResult = pollsRepository.findByInitiatedAfter(testValue);
-        Assertions.assertTrue(positiveResult.size() == 6, "Result of finding by initiated date  (Positive) must be 36");
+        Assertions.assertEquals(5, positiveResult.size(), "Result of finding by initiated date  (Positive) must be 5");
         Assertions.assertTrue(positiveResult.stream()
                 .map(r -> r.getInitiated() > testValue)
                 .reduce((r1, r2) -> r1 && r2)
@@ -96,6 +96,6 @@ class PollsRepositoryTest {
         Long testValue = new SimpleDateFormat("yyyy-MM-dd").parse("2017-01-29").getTime();
 
         List<Poll> positiveResult = pollsRepository.findByInitiatedAfter(testValue);
-        Assertions.assertTrue(positiveResult.size() == 0, "Result of finding by initiated date  (Negative) must be 0");
+        Assertions.assertEquals(0, positiveResult.size(), "Result of finding by initiated date  (Negative) must be 0");
     }
 }

@@ -10,13 +10,21 @@ import org.springframework.format.datetime.standard.DateTimeFormatterRegistrar;
 import org.springframework.format.support.DefaultFormattingConversionService;
 import org.springframework.format.support.FormattingConversionService;
 
+import javax.annotation.PostConstruct;
 import java.time.format.DateTimeFormatter;
+import java.util.TimeZone;
 
 @SpringBootApplication
 public class PeDoodleApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(PeDoodleApplication.class, args);
+    }
+
+
+    @PostConstruct
+    public void init(){
+        TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
     }
 
     /**
