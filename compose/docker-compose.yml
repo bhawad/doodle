@@ -7,10 +7,6 @@ services:
       - "27017-27019:27017-27019"
     environment:
       - MONGO_INITDB_DATABASE=doodle_db
-      - MONGO_INITDB_ROOT_USERNAME=doodle
-      - MONGO_INITDB_ROOT_PASSWORD=12345
-    volumes:
-      - "./mongo:/docker-entrypoint-initdb.d"
   mongo-data:
     image: "mongo:4.4"
     links:
@@ -18,4 +14,4 @@ services:
     volumes:
       - ./mongo:/mongo-data
     command:
-      'bash -c "mongoimport  --username doodle --password 12345 --db doodle_db --collection polls  --host mongo --type json --file /mongo-data/polls.json --jsonArray"'
+      'bash -c "mongoimport  --db doodle_db --collection polls  --host mongo --type json --file /mongo-data/polls.json --jsonArray"'
